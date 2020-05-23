@@ -1,4 +1,4 @@
 package entity.form
 
-class DispatchingForm extends Form {
+class DispatchingForm {
 }
