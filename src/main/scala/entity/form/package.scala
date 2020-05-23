@@ -21,18 +21,19 @@ package object form {
     jencode4L((cp: CarPlate) => (cp.state, cp.area, cp.serial, cp.random))("State", "Serial", "Area", "Random")
 
   implicit def CarPlateDecodeFromJson: DecodeJson[CarPlate] =
-    jdecode4L(CarPlate.apply)("State", "Area", "Serial","Random")
+    jdecode4L(CarPlate.apply)("State", "Serial", "Area", "Random")
 
   def person(json: Json): Person = (json.hcursor --\ "GoodsOwner").as[Json].value.get.as[Person].toOption.get
   def formNo(json: Json): Int = (json.hcursor --\ "FormNo").as[Json].value.get.as[Int].toOption.get
   def date(json: Json): Date = (json.hcursor --\ "ReceivedDate").as[Json].value.get.as[Date].toOption.get
   def part(json: Json): Int = (json.hcursor --\ "PartNo").as[Json].value.get.as[Int].toOption.get
-  def carPlate(json: Json): CarPlate = (json.hcursor --\ "TruckNo").as[Json].value.get.as[CarPlate].toOption.get
+  def carPlate(json: Json): CarPlate = (json.hcursor --\ "truckNo").as[Json].value.get.as[CarPlate].toOption.get
   def location(json: Json): String = (json.hcursor --\ "Origin").as[Json].value.get.as[String].toOption.get
   def bOL(json: Json): String = (json.hcursor --\ "BillOfLadingNo").as[Json].value.get.as[String].toOption.get
+  def itemsList(json: Json): List[Item] = (json.hcursor --\ "ItemsList").as[Json].value.get.as(List[Item]).getOrElse(Nil)
   def comments(json: Json): String = (json.hcursor --\ "Comments").as[Json].value.get.as[String].toOption.get
   def representative(json: Json): Person = (json.hcursor --\ "Representative").as[Json].value.get.as[Person].toOption.get
-  def receivingForm(json:Json): ReceivingForm = ReceivingForm(person(json), formNo(json), date(json), part(json), carPlate(json), bOL(json), location(json), comments(json), representative(json))
+  def receivingForm(json:Json): ReceivingForm = ReceivingForm(person(json), formNo(json), date(json), part(json), carPlate(json), bOL(json), location(json), itemsList(json), comments(json), representative(json))
 
   /*
   implicit def ItemEncodeToJson: EncodeJson[Item] =
