@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="B06904FC0A6F41487486C85543FCFCA1907CE03B8E10CF9EA95F4CDC7BEB2871.xslt"?>
+<psb:goodsout xmlns:psb="a">
+    <psb:head>
+        <psb:no/>
+        <psb:date/>
+        <psb:goodsowner/>
+        <psb:draftno/>
+        <psb:part/>
+        <psb:draftowner/>
+        <psb:truckno/>
+    </psb:head>
+    <psb:body>
+        <psb:itemslist>
+            <psb:item>
+                <psb:title/>
+                <psb:quantity/>
+                <psb:unit/>
+                <psb:gweight/>
+                <psb:pweight/>
+                <psb:nweight/>
+            </psb:item>
+        </psb:itemslist>
+        <psb:sum/>
+    </psb:body>
+    <psb:notes/>
+</psb:goodsout>
