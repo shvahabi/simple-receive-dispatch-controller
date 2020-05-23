@@ -1,11 +1,12 @@
 import argonaut.Argonaut._
+import argonaut.Json
+import entity.Transaction
 import entity.form._
 
 
 object Main extends App {
 val aJSONString: String =
-  """
-    |{
+  """{
     |  "FormNo": 1234,
     |  "ReceivedDate": {
     |    "Year": 2020,
@@ -28,23 +29,23 @@ val aJSONString: String =
     |  },
     |  "ItemsList": [
     |    {
-    |      "Title": "cream",
+    |      "Description": "cream",
     |      "Quantity": 2,
     |      "UnitOfMeasurement": "box",
-    |      "GrossWeight": 100,
-    |      "PackageWeight": 2,
-    |      "NetWeight": 98
+    |      "GrossWeight": 100.123456,
+    |      "PackageWeight": 2.234567,
+    |      "NetWeight": 98.345678
     |    },
     |    {
-    |      "Title": "ice cream",
+    |      "Description": "ice cream",
     |      "Quantity": 3,
     |      "UnitOfMeasurement": "pieces",
-    |      "GrossWeight": 150,
-    |      "PackageWeight": 1,
-    |      "NetWeight": 149
+    |      "GrossWeight": 150.9011,
+    |      "PackageWeight": 1.5,
+    |      "NetWeight": 149.4467
     |    },
     |    {
-    |      "Title": "milk",
+    |      "Description": "milk",
     |      "Quantity": 2,
     |      "UnitOfMeasurement": "Gallon",
     |      "GrossWeight": 55,
@@ -61,7 +62,11 @@ val aJSONString: String =
     |}
   """.stripMargin
 
-  val myForm = receivingForm(aJSONString.parse.toOption.asJson)
+
+  //val myJson = aJSONString.parse.toOption.asJson
+  //val myForm = receivingForm(myJson)
+
+  //val carplate = (myJson.hcursor --\ "TruckNo").as[Json].value.get.as[CarPlate].toOption.get
 
   /*
   println(entity.orm.Person(myForm.goodsOwner.firstName, myForm.goodsOwner.surName, myForm.goodsOwner.nationalIDNo).toSql)
@@ -71,10 +76,6 @@ val aJSONString: String =
 
    */
 
-  print(entity.orm.Transaction(aJSONString).toSql)
-
-
-
-
-
+  print(Transaction(aJSONString).toSql)
+//println(entity.form.person(myJson))
 }
