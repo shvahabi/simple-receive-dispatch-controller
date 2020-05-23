@@ -2,9 +2,20 @@ import argonaut.Argonaut._
 import argonaut.Json
 import entity.Transaction
 import entity.form._
+//import utilities._
+import better.files.Dsl._
+import better.files._
+import scalikejdbc._
 
 
 object Main extends App {
+  Class.forName("org.h2.Driver")
+  ConnectionPool.singleton("jdbc:h2:tcp://localhost//home/shahed/Documents/برنا سرو پادرا/builds/version 0.6.0/assets/DB/DB1", "sa", "sa")
+  GlobalSettings.loggingSQLAndTime = LoggingSQLAndTimeSettings(
+    enabled = false,
+    singleLineMode = false
+  )
+
 val aJSONString: String =
   """{
     |  "FormNo": 1234,
@@ -24,7 +35,7 @@ val aJSONString: String =
     |  "TruckNo": {
     |    "State": 10,
     |    "Serial": 22,
-    |    "Area": "yy",
+    |    "Area": "y",
     |    "Random": 792
     |  },
     |  "ItemsList": [
@@ -76,6 +87,11 @@ val aJSONString: String =
 
    */
 
-  print(Transaction(aJSONString).toSql)
+  print()
 //println(entity.form.person(myJson))
+
+  DB localTx { implicit session =>
+    SQL(Transaction(aJSONString).toSql).execute().apply()
+  }
+
 }
