@@ -10,7 +10,7 @@ import scalikejdbc._
 
 object Main extends App {
   Class.forName("org.h2.Driver")
-  ConnectionPool.singleton("jdbc:h2:tcp://localhost//home/shahed/Documents/برنا سرو پادرا/builds/version 0.6.0/assets/DB/DB1", "sa", "sa")
+  ConnectionPool.singleton("jdbc:h2:tcp://localhost//home/shahed/Documents/برنا سرو پادرا/builds/version 0.6.0/assets/DB/DB2", "sa", "sa")
   GlobalSettings.loggingSQLAndTime = LoggingSQLAndTimeSettings(
     enabled = false,
     singleLineMode = false
