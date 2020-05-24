@@ -1,9 +1,9 @@
-# Simple Data Entry #
+# Receive Dispatch #
 
 ## Build & Run ##
 
 ```sh
-$ cd simple-data-entry
+$ cd receive-dispatch
 $ sbt
 > jetty:start
 > browse
