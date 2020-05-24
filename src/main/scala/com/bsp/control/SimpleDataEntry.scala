@@ -4,8 +4,16 @@ import org.scalatra._
 
 class SimpleDataEntry extends ScalatraServlet {
 
+  /*
   get("/") {
-    views.html.hello()
+       views.html.hello()
   }
+
+
+  get("/receiving") {
+    html.receivingform
+  }
+
+   */
 
 }
