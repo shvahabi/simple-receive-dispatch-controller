@@ -8,7 +8,7 @@ class ReceiveDispatchServlet extends ScalatraServlet {
 
   before() {
     Class.forName("org.h2.Driver")
-    ConnectionPool.singleton("jdbc:h2:tcp://localhost//home/shahed/Documents/bsp/builds/version 0.12.0/assets/DB/DB1", "sa", "sa")
+    ConnectionPool.singleton("jdbc:h2:tcp://localhost//home/shahed/Documents/bsp/builds/version 0.13.0/assets/DB/DB1", "sa", "sa")
     GlobalSettings.loggingSQLAndTime = LoggingSQLAndTimeSettings(
       enabled = false,
       singleLineMode = false
@@ -48,33 +48,31 @@ class ReceiveDispatchServlet extends ScalatraServlet {
 	}
 
   post("/forms/receiving") {
-
-    /*
-    val jsonString = request.body
-    val headers = Map("Access-Control-Allow-Origin" -> "*",
+/*
+  val jsonString = request.body
+val headers = Map("Access-Control-Allow-Origin" -> "*",
                     "Access-Control-Allow-Methods" -> "POST, GET, OPTIONS, DELETE",
                     //"Access-Control-Max-Age" -> "3600",
                     "Access-Control-Allow-Headers" -> "Origin, X-Requested-With, Content-Type, Accept")
-    Ok(jsonString,headers)
-     */
 
-    /*
+  Ok(jsonString,headers)
+
+
+
+
     <html>
-      <p>{request.parameters.toMap.keys}</p>
-      <!--<p>{params.toMap.keySet.toList.head}</p>-->
+      <!-- <p>{request.parameters.toMap.keys}</p>
+      <p>{params.toMap.keySet.toList.head}</p>
 
 
       <p>{params.toMap.keys.toString()}</p>
       <p>{request.parameters.toMap.values}</p>
       <p>{params.toMap.values}</p>
+			<p>{request.toString}</p> -->
       <p>{request.body.intern}</p>
-      <p>{request.toString}</p>
+      
 
     </html>
-
-     */
-
-    println(request.body.intern.toString)
     /*
 
     <html>
@@ -84,12 +82,17 @@ class ReceiveDispatchServlet extends ScalatraServlet {
     </html>
 */
 
-    /*
+*/
+
+    
+    //println(request.body.intern)
+    
+
     DB localTx { implicit session =>
-      SQL(Transaction(params.toMap.keySet.toList.head).toSql).execute().apply()
+      SQL(Transaction(request.body.intern).toSql).execute().apply()
     }
 
-     */
+    
 
   }
 
