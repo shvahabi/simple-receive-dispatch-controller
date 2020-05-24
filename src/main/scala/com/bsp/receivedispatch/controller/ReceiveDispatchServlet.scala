@@ -8,7 +8,7 @@ class ReceiveDispatchServlet extends ScalatraServlet {
 
   before() {
     Class.forName("org.h2.Driver")
-    ConnectionPool.singleton("jdbc:h2:tcp://localhost//home/shahed/Documents/bsp/builds/version 0.13.0/assets/DB/DB1", "sa", "sa")
+    ConnectionPool.singleton("jdbc:h2:tcp://localhost//home/shahed/Documents/bsp/builds/version 0.14.0/assets/DB/DB2", "sa", "sa")
     GlobalSettings.loggingSQLAndTime = LoggingSQLAndTimeSettings(
       enabled = false,
       singleLineMode = false
