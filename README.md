@@ -1,9 +1,9 @@
-# Receive Dispatch #
+# Simple Receive Dispatch #
 
 ## Build & Run ##
 
 ```sh
-$ cd receive-dispatch
+$ cd simple-receive-dispatch
 $ sbt
 > jetty:start
 > browse
