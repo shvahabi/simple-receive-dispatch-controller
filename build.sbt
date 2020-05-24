@@ -1,35 +1,27 @@
-scalaVersion := "2.13.1"
+val ScalatraVersion = "2.7.0-RC1"
 
-name := "bsp"
-organization := "ch.epfl.scala"
-version := "1.0"
+organization := "com.bsp"
 
-//libraryDependencies += "org.typelevel" %% "cats-core" % "2.0.0"
+name := "Simple Data Entry"
 
-libraryDependencies += "org.scalikejdbc" %% "scalikejdbc-syntax-support-macro" % "3.3.2"
+version := "0.8.0"
 
+scalaVersion := "2.12.10"
 
-/*
-libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.1.1"
-
-ThisBuild / scalaVersion     := "2.12.8"
-ThisBuild / version          := "0.1.0-SNAPSHOT"
-ThisBuild / organization     := "com.example"
-ThisBuild / organizationName := "example"
-*/
+resolvers += Classpaths.typesafeReleases
 
 libraryDependencies ++= Seq(
-  "org.scalikejdbc" %% "scalikejdbc"        % "3.4.+",
-  "com.h2database"  %  "h2"                 % "1.4.+",
-  "ch.qos.logback"  %  "logback-classic"    % "1.2.+"
+  "org.scalatra" %% "scalatra" % ScalatraVersion,
+  "org.scalatra" %% "scalatra-scalatest" % ScalatraVersion % "test",
+  "ch.qos.logback" % "logback-classic" % "1.2.3" % "runtime",
+  "org.eclipse.jetty" % "jetty-webapp" % "9.4.19.v20190610" % "container",
+  "javax.servlet" % "javax.servlet-api" % "3.1.0" % "provided"
 )
 
-libraryDependencies += "org.scalikejdbc" %% "scalikejdbc-syntax-support-macro" % "3.4.0"
+javaOptions ++= Seq(
+  "-Xdebug",
+  "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005"
+)
 
-
-lazy val betterVersion = "3.8.0"
-
-libraryDependencies += "com.github.pathikrit" %% "better-files" % betterVersion
-
-libraryDependencies += "io.argonaut" %% "argonaut" % "6.2.3" 
-
+enablePlugins(SbtTwirl)
+enablePlugins(ScalatraPlugin)
