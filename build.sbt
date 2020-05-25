@@ -4,7 +4,7 @@ organization := "com.bsp"
 
 name := "Receive Dispatch Controller"
 
-version := "0.30.1"
+version := "0.30.8"
 
 scalaVersion := "2.12.10"
 
