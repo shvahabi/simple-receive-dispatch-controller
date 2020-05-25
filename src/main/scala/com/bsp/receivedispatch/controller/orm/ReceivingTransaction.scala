@@ -19,6 +19,6 @@ case class ReceivingTransaction(jsonString: String) {
   private val form: Form = jsonObject.transactify._2
   private val received: ReceivingForm = jsonObject.transactify._1
 
-  def toSql: String = client.toSql + truckNumber.toSql + date.toSql + form.toSql(thisTransactionGeneratedFormNumber) + itemsList.map(_.toSql(thisTransactionGeneratedFormNumber)).reduceLeft(_+_) + received.toSql(thisTransactionGeneratedFormNumber) + (if(representative.toSql == client.toSql) " ;" else representative.toSql)
+  def toSql: String = client.toSql + (if(representative.toSql == client.toSql) " ;" else representative.toSql) + truckNumber.toSql + date.toSql + form.toSql(thisTransactionGeneratedFormNumber) + itemsList.map(_.toSql(thisTransactionGeneratedFormNumber)).reduceLeft(_+_) + received.toSql(thisTransactionGeneratedFormNumber)
 }
 
