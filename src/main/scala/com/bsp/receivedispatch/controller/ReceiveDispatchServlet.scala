@@ -1,6 +1,6 @@
 package com.bsp.receivedispatch.controller
 
-import com.bsp.receivedispatch.controller.orm.Transaction
+import com.bsp.receivedispatch.controller.orm.{DispatchingTransaction, ReceivingTransaction}
 import org.scalatra._
 import scalikejdbc._
 
@@ -15,85 +15,43 @@ class ReceiveDispatchServlet extends ScalatraServlet {
     )
   }
 
+  get("/receivedispatch/read/receipts/:id") {
+    <p>contets for requested receipt form number is {params("id")}</p>
+  }
+  get("/receivedispatch/read/dispatches/:id") {
+    <p>contents for requested dispatched form number is {params("id")}</p>
+  }
+  post("/receivedispatch/create/receipts") {
+    DB localTx { implicit session =>
+      SQL(ReceivingTransaction(request.body.intern).toSql).execute().apply()
+    }
+  }
+  post("/receivedispatch/create/dispatches") {
+    DB localTx { implicit session =>
+      SQL(DispatchingTransaction(request.body.intern).toSql).execute().apply()
+    }
+  }
+  delete("/receivedispatch/delete/receipts/:id") {
+    <p>requested receipt form number to be deleted is {params("id")}</p>
+  }
+  delete("/receivedispatch/delete/dispatches/:id") {
+    <p>requested dispatched form number to be deleted is {params("id")}</p>
+  }
+  put("/receivedispatch/update/receipts/:id") {
+    <p>requested receipt form number to be updated is {params("id")}</p>
+  }
+  put("/receivedispatch/update/dispatches/:id") {
+    <p>requested dispatched form number to be updated is {params("id")}</p>
+  }
+
+  get("/receivedispatch/people") {
+    //todo: list of clients to be served here
+  }
+
 
   get("/") {
+    //todo: replaced with dashboard
     views.html.hello()
-  }
-  
-	get("/forms/receiving") {
-
-    <html charset="UTF-8">
-      <p>this works</p>
-      <p>{request.parameters.toMap.toString()}</p>
-      <p>{params.toMap.toString()}</p>
-      <p>{request.parameters.toMap.keys}</p>
-      <p>{params.toMap.keys}</p>
-      <p>{request.parameters.toMap.values}</p>
-      <p>{params.toMap.values}</p>
-      <p>{request.toString}</p>
-      <p>{request.parameters.toMap.values.toList.toString()}</p>
-      <p>{request.headers.get("User-Agent")}</p>
-      <p>{request.headers.get("Host")}</p>
-      <p>{request.headers.get("Accept")}</p>
-      <p>{request.headers.get("Content-Length")}</p>
-      <p>{request.headers.get("Expect")}</p>
-      <p>{request.headers.get("Content-Type")}</p>
-      <p>{request.body.length}</p>
-      <p>{request.getContentLength}</p>
-      <p>{request.body.intern}</p>
-      <p>{request.body.lines.toArray}</p>
-      <p>{request.body.lines.count()}</p>
-      <p>{request.body.intern.linesWithSeparators}</p>
-    </html>
-	}
-
-  post("/forms/receiving") {
-/*
-  val jsonString = request.body
-val headers = Map("Access-Control-Allow-Origin" -> "*",
-                    "Access-Control-Allow-Methods" -> "POST, GET, OPTIONS, DELETE",
-                    //"Access-Control-Max-Age" -> "3600",
-                    "Access-Control-Allow-Headers" -> "Origin, X-Requested-With, Content-Type, Accept")
-
-  Ok(jsonString,headers)
-
-
-
-
-    <html>
-      <!-- <p>{request.parameters.toMap.keys}</p>
-      <p>{params.toMap.keySet.toList.head}</p>
-
-
-      <p>{params.toMap.keys.toString()}</p>
-      <p>{request.parameters.toMap.values}</p>
-      <p>{params.toMap.values}</p>
-			<p>{request.toString}</p> -->
-      <p>{request.body.intern}</p>
-      
-
-    </html>
-    /*
-
-    <html>
-      <p>{Transaction(params.toMap.keySet.toList.head).toSql}</p>
-      <p>{request.toString}</p>
-
-    </html>
-*/
-
-*/
-
-    
-    //println(request.body.intern)
-    
-
-    DB localTx { implicit session =>
-      SQL(Transaction(request.body.intern).toSql).execute().apply()
-    }
-
-    
-
   }
 
 }
