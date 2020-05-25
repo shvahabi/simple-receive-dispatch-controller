@@ -18,7 +18,7 @@ case class DispatchingTransaction(jsonString: String) {
   private val beneficiary: Person = jsonObject.beneficiary.transactify
   private val draftDate: CalendarDay = jsonObject.draftDate.transactify
 
-  def toSql: String = client.toSql + truckNumber.toSql + date.toSql + form.toSql(thisTransactionGeneratedFormNumber) + itemsList.map(_.toSql(thisTransactionGeneratedFormNumber)).reduceLeft(_+_) + draftDate.toSql + (if(beneficiary.toSql == client.toSql) " ;" else beneficiary.toSql) + (if((assignee.toSql == client.toSql) || (assignee.toSql == beneficiary.toSql)) " ;" else assignee.toSql) +
+  def toSql: String = client.toSql + truckNumber.toSql + date.toSql + form.toSql(thisTransactionGeneratedFormNumber) + itemsList.map(_.toSql(thisTransactionGeneratedFormNumber)).reduceLeft(_+_) + (if(draftDate.toSql == date.toSql) " ;" else draftDate.toSql) + (if(beneficiary.toSql == client.toSql) " ;" else beneficiary.toSql) + (if((assignee.toSql == client.toSql) || (assignee.toSql == beneficiary.toSql)) " ;" else assignee.toSql) +
     dispatched.toSql(thisTransactionGeneratedFormNumber)
   
 

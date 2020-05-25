@@ -4,7 +4,7 @@ import scalikejdbc._
 
 case class Person(firstName: String, surName: String, nationalIDNo: String) {
   def exists: Boolean =
-    nationalIDNo == (DB readOnly { implicit session => sql"SELECT nationalidno FROM people WHERE nationalidno = '${nationalIDNo}'".map(rs => rs.string("nationalidno")).single.apply }).getOrElse(" ")
+    nationalIDNo == (DB readOnly { implicit session => sql"SELECT nationalidno FROM people WHERE nationalidno = ${nationalIDNo}".map(rs => rs.string("nationalidno")).single.apply }).getOrElse(" ")
   def toSql: String =
     if (exists)
       " ;"
