@@ -2,9 +2,9 @@ val ScalatraVersion = "2.7.0-RC1"
 
 organization := "com.bsp"
 
-name := "Simple Receive Dispatch"
+name := "Receive Dispatch Controller"
 
-version := "0.11.0"
+version := "0.15.0"
 
 scalaVersion := "2.12.10"
 
