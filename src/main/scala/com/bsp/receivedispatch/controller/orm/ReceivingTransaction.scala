@@ -11,14 +11,14 @@ case class ReceivingTransaction(jsonString: String) {
   //private val truckNumber: CarPlate = CarPlate(jsonObject.truck.concat, jsonObject.truck.)
   private val truckNumber: CarPlate = jsonObject.truck.transactify
 
-  private val calendarDay: CalendarDay = jsonObject.date.transactify
+  private val date: CalendarDay = jsonObject.date.transactify
 
-  private val thisTransactionGeneratedFormNumber = jsonObject.number //from query
+  private val thisTransactionGeneratedFormNumber = jsonObject.number //todo: from query
   private val itemsList: List[Item] = jsonObject.itemsList.map(_.transactify)
 
   private val form: Form = jsonObject.transactify._2
   private val received: ReceivingForm = jsonObject.transactify._1
 
-  def toSql: String = client.toSql + representative.toSql + truckNumber.toSql + calendarDay.toSql + form.toSql(thisTransactionGeneratedFormNumber) + itemsList.map(_.toSql(thisTransactionGeneratedFormNumber)).reduceLeft(_+_) + received.toSql(thisTransactionGeneratedFormNumber)
+  def toSql: String = client.toSql + truckNumber.toSql + date.toSql + form.toSql(thisTransactionGeneratedFormNumber) + itemsList.map(_.toSql(thisTransactionGeneratedFormNumber)).reduceLeft(_+_) + received.toSql(thisTransactionGeneratedFormNumber) + (if(representative.toSql == client.toSql) " ;" else representative.toSql)
 }
 

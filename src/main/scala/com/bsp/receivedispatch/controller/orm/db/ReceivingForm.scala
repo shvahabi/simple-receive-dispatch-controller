@@ -5,6 +5,6 @@ case class ReceivingForm(originOfGoods: String, billOfLadingNumber: String, nidO
     f"""
        |INSERT INTO
        |`received` (`origin`, `bill of lading number`, `representative`,`form`)
-       |VALUES ('${originOfGoods}', '${billOfLadingNumber}', ${nidOfRepresentative}, ${formNumber});
+       |VALUES ('${originOfGoods}', '${billOfLadingNumber}', '${nidOfRepresentative}', ${formNumber});
      """.stripMargin
 }
