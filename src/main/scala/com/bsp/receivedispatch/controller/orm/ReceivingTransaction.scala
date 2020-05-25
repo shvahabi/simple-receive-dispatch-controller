@@ -1,9 +1,8 @@
 package com.bsp.receivedispatch.controller.orm
 import argonaut.Argonaut._
-
 import db._
 
-case class Transaction(jsonString: String) {
+case class ReceivingTransaction(jsonString: String) {
   private val jsonObject: ui.ReceivingForm = ui.receivingForm(jsonString.parse.toOption.asJson)
   //private val goodsOwner: Person = Person(jsonObject.goodsOwner.firstName, jsonObject.goodsOwner.surName, jsonObject.goodsOwner.nationalIDNo)
   private val client: Person = jsonObject.goodsOwner.transactify
